@@ -1,0 +1,39 @@
+<launch>
+  <arg name="robot_name" default="tinyRobot1" doc="The name of the robot"/>
+  <arg name="fleet_name" default="tinyRobot" doc="The robot fleet"/>
+  <arg name="set_map_frame"  default="map" doc="The robot fleet"/>
+
+
+  <node name="free_fleet_client_node" 
+      pkg="free_fleet_client_ros1"
+      type="free_fleet_client_ros1" output="screen">
+    <param name="fleet_name" type="string" value="$(arg fleet_name)"/>
+    <param name="robot_name" type="string" value="$(arg robot_name)"/>
+    <param name="dds_domain" type="int" value="42"/>
+    <param name="max_dist_to_first_waypoint" type="double" value="10.0"/>
+    <param name="battery_state_topic" value="battery_state"/>
+    <param name="robot_frame" value="base_footprint"/>
+    <param name="move_base_server_name" value="move_base"/>
+  </node>
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/param/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    
+    <param name="local_costmap/scan/sensor_frame"   value="$(arg set_scan_frame)"/>
+    <param name="local_costmap/global_frame"        value="$(arg set_odom_frame)"/>
+    <param name="local_costmap/robot_base_frame"    value="$(arg set_base_frame)"/>
+    <param name="global_costmap/scan/sensor_frame"  value="$(arg set_scan_frame)"/>
+    <param name="global_costmap/global_frame"       value="$(arg set_map_frame)"/>
+    <param name="global_costmap/robot_base_frame"   value="$(arg set_base_frame)"/>
+    <remap from="map" to="/map"/>
+  </node>
+</launch>

@@ -1,0 +1,15 @@
+<launch>
+  <!--This file is for a simple a "client" running gazebo-->
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find ff_examples_ros1)/models:/usr/share/gazebo-11/models"/>
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver"  output="screen"
+  args="$(find ff_examples_ros1)/worlds/example_full_flow.world"
+  required="true"/>
+
+  <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient"  output="screen"
+  args="$(find ff_examples_ros1)/worlds/example_full_flow.world"
+  required="true"/>
+
+  <!--<include file="$(find ff_examples_ros1)/launch/cloud_client.launch"/>-->
+
+</launch>

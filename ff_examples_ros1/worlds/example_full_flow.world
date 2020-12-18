@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <gui>
+      <camera name="gui_camera">
+        <pose>50.0 -70.0 10 0 0.6 1.57</pose>
+      </camera>
+      <plugin name="toggle_charging" filename="libtoggle_charging.so" />
+      <plugin name="toggle_floors" filename="libtoggle_floors.so">
+        <floor name="L1" model_name="box_world_L1" />
+      </plugin>
+    </gui>
+
+    <include>
+      <name>tinyRobot1</name>
+      <uri>model://TinyRobotDiffDrive</uri>
+      <pose>84.088 -12.735 0.0 0 0 3.141592653589793</pose>
+    </include>
+  </world>
+</sdf>
