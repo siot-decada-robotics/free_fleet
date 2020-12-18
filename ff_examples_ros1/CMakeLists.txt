@@ -25,6 +25,16 @@ if (catkin_FOUND)
     DESTINATION share/${PROJECT_NAME}
   )
 
+  install(
+    DIRECTORY models
+    DESTINATION share/${PROJECT_NAME}
+  )
+
+  install(
+    DIRECTORY worlds
+    DESTINATION share/${PROJECT_NAME}
+  )
+
 else()
   message("catkin not found so skipping this ROS1 package")
 endif()
