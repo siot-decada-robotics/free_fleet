@@ -35,6 +35,11 @@ if (catkin_FOUND)
     DESTINATION share/${PROJECT_NAME}
   )
 
+  install(
+    DIRECTORY config
+    DESTINATION share/${PROJECT_NAME}
+  )
+
 else()
   message("catkin not found so skipping this ROS1 package")
 endif()
