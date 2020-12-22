@@ -10,7 +10,7 @@
         respawn="true">
       <param name="fleet_name" type="string" value="$(arg fleet_name)"/>
       <param name="robot_name" type="string" value="$(arg robot_name)"/>
-      <param name="dds_domain" type="int" value="42"/>
+      <param name="dds_domain" type="int" value="44"/>
       <param name="max_dist_to_first_waypoint" type="double" value="10.0"/>
       <param name="battery_state_topic" value="battery_state"/>
       <param name="robot_frame" value="$(arg robot_name)/base_footprint"/>
