@@ -49,6 +49,14 @@ target_include_directories(free_fleet
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
+#
+add_executable(tiny_race
+  "src/tests/tiny_race.cpp"
+)
+target_link_libraries(tiny_race
+  Threads::Threads
+)
+
 # Tests
 find_package(ament_cmake_catch2 QUIET)
 find_package(rmf_cmake_uncrustify QUIET)
@@ -96,7 +104,7 @@ write_basic_package_version_file(
 )
 
 install(
-  TARGETS free_fleet
+  TARGETS free_fleet tiny_race
   EXPORT  free_fleet-targets
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -1,0 +1,21 @@
+repositories:
+  rmf_traffic:
+    type: git
+    url: https://github.com/open-rmf/rmf_traffic.git
+    version: main
+  rmf_utils:
+    type: git
+    url: https://github.com/open-rmf/rmf_utils.git
+    version: main
+  rmf_cmake_uncrustify:
+    type: git
+    url: https://github.com/open-rmf/rmf_cmake_uncrustify.git
+    version: main
+  ament_cmake_catch2:
+    type: git
+    url: https://github.com/open-rmf/ament_cmake_catch2.git
+    version: main
+  free_fleet:
+    type: git
+    url: https://github.com/open-rmf/free_fleet.git
+    version: develop
