@@ -1,0 +1,42 @@
+<launch>
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="set_map_frame"  default="map"/>
+
+	<arg name="dds_domain" default="42">
+	<arg name="fleet_name" default="no_name_fleet">
+
+	<!-- launch the navigation stacks turtlebot3-->
+  <arg name="robotns_prefix" default="no_name_tb3"/>
+
+  <group ns="$(arg robotns_prefix)">
+    <include file="$(find ff_examples_ros1)/launch/include/single_turtlebot3_ff.launch">
+      <arg name="model" value="$(arg model)"/>
+      <arg name="set_base_frame" value="$(arg robotns_prefix)/base_footprint"/>
+      <arg name="set_odom_frame" value="$(arg robotns_prefix)/odom"/>
+      <arg name="set_scan_frame" value="$(arg robotns_prefix)/base_scan"/>
+      <arg name="set_map_frame" value="$(arg set_map_frame)"/>
+      <arg name="open_rviz" value="false"/>
+      <arg name="initial_pose_x" default="-6.58309602737"/>
+      <arg name="initial_pose_y" default="-0.598859667778"/>
+      <arg name="initial_pose_a" default="1.57"/>
+    </include>
+  </group>
+
+	<!-- launch the free fleet clients turtlebot3-->
+  <node name="$(arg robotns_prefix)_free_fleet_client_node" 
+      pkg="free_fleet_client_ros1"
+      type="free_fleet_client_ros1" output="screen">
+
+		<!-- Edited fleet name to fetch from arg var -->
+    <param name="fleet_name" type="string" value="$(arg fleet_name)"/>
+
+    <param name="robot_name" type="string" value="$(arg robotns_prefix)"/>
+    <param name="level_name" type="string" value="house"/>
+    <param name="dds_domain" type="int" value="$(arg dds_domain)"/>
+    <param name="max_dist_to_first_waypoint" type="double" value="10.0"/>
+    <param name="battery_state_topic" value="$(arg robotns_prefix)/battery_state"/>
+    <param name="robot_frame" value="$(arg robotns_prefix)/base_footprint"/>
+    <param name="move_base_server_name" value="$(arg robotns_prefix)/move_base"/>
+  </node>
+
+</launch>
