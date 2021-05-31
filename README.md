@@ -164,7 +164,8 @@ Additional packages are required for this example, clone in additional packages 
 ```bash
 cd ~/client_ws/src
 git clone https://github.com/rhaschke/robot_state_publisher -b noetic-devel
-git clone https://github.com/aaronchongth/turtlebot3_simulations -b noetic-devel
+git clone https://github.com/lkw303/turtlebot3_simulations.git -b noetic-devel-multi-fix
+git clone https://github.com/lkw303/turtlebot3.git -b noetic-devel-multi-fix
 
 cd robot_state_publisher
 git checkout 661628a76bbb
