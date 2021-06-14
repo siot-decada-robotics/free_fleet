@@ -70,7 +70,7 @@ Start a new ROS1 workspace, and pull in the necessary repositories,
 ```bash
 mkdir -p ~/client_ws/src
 cd ~/client_ws/src
-git clone https://github.com/open-rmf/free_fleet
+git clone -b noetic-devel-multi-fix https://github.com/siot-decada-robotics/free_fleet.git
 git clone https://github.com/eclipse-cyclonedds/cyclonedds
 ```
 
