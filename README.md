@@ -15,6 +15,7 @@
   - [Turtlebot3 Simulation](#turtlebot3-simulation)
   - [Multi Turtlebot3 Simulation](#multi-turtlebot3-simulation)
   - [Commands and Requests](#commands-and-requests)
+  - [RMF Example](#rmf-example)
 - **[Plans](#plans)**
 
 </br>
@@ -245,6 +246,51 @@ ros2 run ff_examples_ros2 send_mode_request.py -f FLEET_NAME -r ROBOT_NAME -m re
 
 </br>
 </br>
+
+### RMF Example
+
+Below are the steps to set up and run free fleet with the [rmf_demos](https://github.com/siot-decada-robotics/rmf_demos) repository.
+
+The first step is to have RMF installed by following the instructions on the [RMF root repository](https://github.com/siot-decada-robotics/rmf) that we forked.
+
+The reason we forked this repos as the ```rmf.repos``` file contains the url pointing to Decada Robotics' forked version of ```rmf_demos``` repository. We have added a few launch files of our own in our forked repo.
+
+Once all the prerequisites are installed such as the workspaces of **RMF**, **Free Fleet Server** and **Free Fleet Client**, open a new terminal and run the launch file to the simulation that launches the office environment and two turtlebot3 with their free fleet client running.
+
+Additionally before running the launch file, we need to add the library of the required gazebo plugins from RMF to run the simulation with doors and lifts.
+```
+cd ~/client_ws
+source /opt/ros/noetic/setup.bash
+source install/setup.bash
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/rmf_ws/install/rmf_door_msgs/lib:~/rmf_ws/install/rmf_building_sim_gazebo_plugins/lib:~/rmf_ws/install/rmf_building_sim_common/lib:/opt/ros/foxy/lib
+roslaunch ff_examples_ros1 multi_turtlebot3_office_ff.launch
+```
+
+In another terminal run the free fleet server for the turtlebot3 fleet and the robots tb3_0 and tb3_1 should be registered by the server.
+```
+cd ~/server_ws
+source /opt/ros/foxy/setup.bash
+source install/setup.bash
+ros2 launch ff_examples_ros2 turtlebot3_server.launch.xml
+```
+
+Now run RMF with the turtlebot3 fleet adapter without the simulation.
+```
+cd ~/rmf_ws
+source /opt/ros/foxy/setup.bash
+source install/setup.bash
+ros2 launch office_no_sim.launch.xml
+```
+
+You now should be able to send loop tasks to the turtlebot3 fleet by dispatching a loop task via the command line
+```
+ros2 run rmf_demos_tasks dispatch_loop -s coe -f pantry -n 1 --use_sim_time
+```
+![](media/rmf_free_fleet.gif)
+
+Alternatively you can dispatch a task via the dashboard. Do take note that the turtlebot3 fleet adapter can only take in loop tasks.
+
+![](media/rmf_free_fleet_dashboard.gif)
 
 ## Plans
 
