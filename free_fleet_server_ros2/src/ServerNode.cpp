@@ -390,7 +390,14 @@ void ServerNode::publish_fleet_state()
     rmf_frame_rs.model = fleet_frame_rs.model;
     rmf_frame_rs.task_id = fleet_frame_rs.task_id;
     rmf_frame_rs.mode = fleet_frame_rs.mode;
-    rmf_frame_rs.battery_percent = fleet_frame_rs.battery_percent;
+    // rmf_frame_rs.battery_percent = fleet_frame_rs.battery_percent;
+
+    //USER BEWARE!
+    // This is just a temprory hacky fix for now
+    // Just for the sake of getting it to run with rmf demos
+    // if the battery is 0.0 the fleet adapters would not bid for tasks
+
+    rmf_frame_rs.battery_percent = 100.0;
   
     rmf_frame_rs.path.clear();
     for (const auto& fleet_frame_path_loc : fleet_frame_rs.path)
