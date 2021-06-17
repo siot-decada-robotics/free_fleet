@@ -73,6 +73,7 @@ mkdir -p ~/client_ws/src
 cd ~/client_ws/src
 git clone -b noetic-devel-multi-fix https://github.com/siot-decada-robotics/free_fleet.git
 git clone https://github.com/eclipse-cyclonedds/cyclonedds
+git clone https://github.com/nilseuropa/gazebo_ros_battery.git
 ```
 
 Install all the dependencies through `rosdep`,
@@ -99,7 +100,7 @@ Start a new ROS2 workspace, and pull in the necessary repositories,
 ```bash
 mkdir -p ~/server_ws/src
 cd ~/server_ws/src
-git clone -b battery-hack https://github.com/siot-decada-robotics/free_fleet.git
+git clone -b noetic-devel-multi-fix https://github.com/siot-decada-robotics/free_fleet.git
 git clone https://github.com/open-rmf/rmf_internal_msgs
 ```
 
