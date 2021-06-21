@@ -255,7 +255,7 @@ The first step is to have RMF installed by following the instructions on the [RM
 
 The reason we forked this repository is beacuse the ```rmf.repos``` file contains the url pointing to Decada Robotics' forked version of ```rmf_demos``` repository. We have added a few launch files of our own in our forked repo.
 
-Once all the prerequisites are installed such as the workspaces of **RMF**, **Free Fleet Server** and **Free Fleet Client**, open a new terminal and run the launch file to the simulation that launches the office environment and two turtlebot3 with their free fleet client running on ROS1.
+Once all the prerequisites are installed such as the workspaces of **RMF**, **Free Fleet Server** and **Free Fleet Client**, **[ROS1_bridge](https://github.com/ros2/ros1_bridge)** open a new terminal and run the launch file to the simulation that launches the office environment and two turtlebot3 with their free fleet client running on ROS1.
 
 Additionally before running the launch file, we need to add the path library of the required gazebo plugins from RMF into `LD_LIBRARY_PATH` to run the simulation with doors and lifts.
 ```
@@ -265,6 +265,7 @@ source install/setup.bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/rmf_ws/install/rmf_door_msgs/lib:~/rmf_ws/install/rmf_building_sim_gazebo_plugins/lib:~/rmf_ws/install/rmf_building_sim_common/lib:/opt/ros/foxy/lib
 roslaunch ff_examples_ros1 multi_turtlebot3_office_ff.launch
 ```
+<br/>
 
 In another terminal run the free fleet server for the turtlebot3 fleet and the robots tb3_0 and tb3_1 should be registered by the server.
 ```
@@ -273,14 +274,25 @@ source /opt/ros/foxy/setup.bash
 source install/setup.bash
 ros2 launch ff_examples_ros2 turtlebot3_server.launch.xml
 ```
+<br/>
 
-Now run RMF with the turtlebot3 fleet adapter without the simulation.
+Before running the Fleet Adapters, Visualisers, API server from RMF, we need to run ros1_bridge to bridge the ```/clock``` topic so the nodes of RMF running on ROS2 can sync with the ```/clock``` topic with the simulation running on ROS1.
+```
+cd ros1_bridge_ws
+source /opt/ros/foxy/setup.bash
+source ./install/setup.bash
+ros2 run ros1_bridge dynamic_bridge
+```
+<br/>
+
+Now run RMF with the turtlebot3 fleet adapter, visuliser node and API server without the simulation.
 ```
 cd ~/rmf_ws
 source /opt/ros/foxy/setup.bash
 source install/setup.bash
 ros2 launch rmf_demos office_no_sim.launch.xml
 ```
+<br/>
 
 You now should be able to send loop tasks to the turtlebot3 fleet by dispatching a loop task via the command line
 ```
