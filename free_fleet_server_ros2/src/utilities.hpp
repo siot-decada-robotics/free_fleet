@@ -23,12 +23,14 @@
 #include <rmf_fleet_msgs/msg/mode_request.hpp>
 #include <rmf_fleet_msgs/msg/path_request.hpp>
 #include <rmf_fleet_msgs/msg/destination_request.hpp>
+#include <rmf_fleet_msgs/msg/map_request.hpp>
 
 #include <free_fleet/messages/Location.hpp>
 #include <free_fleet/messages/RobotState.hpp>
 #include <free_fleet/messages/ModeRequest.hpp>
 #include <free_fleet/messages/PathRequest.hpp>
 #include <free_fleet/messages/DestinationRequest.hpp>
+#include <free_fleet/messages/MapRequest.hpp>
 
 namespace free_fleet
 {
@@ -49,6 +51,10 @@ void to_ff_message(
 void to_ff_message(
     const rmf_fleet_msgs::msg::DestinationRequest& in_msg, 
     messages::DestinationRequest& out_msg);
+
+void to_ff_message(
+    const rmf_fleet_msgs::msg::MapRequest& in_msg, 
+    messages::MapRequest& out_msg);
 
 // ----------------------------------------------------------------------------
 
