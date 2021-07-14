@@ -27,6 +27,7 @@
 #include <free_fleet/messages/ModeRequest.hpp>
 #include <free_fleet/messages/PathRequest.hpp>
 #include <free_fleet/messages/DestinationRequest.hpp>
+#include <free_fleet/messages/MapRequest.hpp>
 
 namespace free_fleet {
 
@@ -81,6 +82,15 @@ public:
   ///   True if the destination request was successfully sent, false otherwise.
   bool send_destination_request(
       const messages::DestinationRequest& destination_request);
+
+  /// Attempts to send a new map request to all the clients. Clients 
+  /// are in charge to identify if requests are targetted towards them.
+  ///
+  /// \param[in] destination_request
+  ///   New map request to be sent out to the clients.
+  /// \return
+  ///   True if the map request was successfully sent, false otherwise.
+  bool send_map_request(const messages::MapRequest& map_request);
 
   /// Destructor
   ~Server();
