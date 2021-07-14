@@ -29,6 +29,7 @@ struct ClientConfig
   std::string dds_mode_request_topic = "mode_request";
   std::string dds_path_request_topic = "path_request";
   std::string dds_destination_request_topic = "destination_request";
+  std::string dds_map_request_topic = "map_request";
 
   void print_config() const;
 };
