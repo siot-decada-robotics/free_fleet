@@ -33,6 +33,7 @@
 #include <rmf_fleet_msgs/msg/mode_request.hpp>
 #include <rmf_fleet_msgs/msg/path_request.hpp>
 #include <rmf_fleet_msgs/msg/destination_request.hpp>
+#include <rmf_fleet_msgs/msg/map_request.hpp>
 
 #include <free_fleet/Server.hpp>
 #include <free_fleet/messages/Location.hpp>
@@ -83,6 +84,10 @@ private:
       const rmf_fleet_msgs::msg::Location& rmf_frame_location, 
       rmf_fleet_msgs::msg::Location& fleet_frame_location) const;
 
+  void transform_rmf_to_fleet(
+      const rmf_fleet_msgs::msg::MapRequest& rmf_map_request,
+      rmf_fleet_msgs::msg::MapRequest& fleet_map_request) const;
+
   // --------------------------------------------------------------------------
 
   rclcpp::Subscription<rmf_fleet_msgs::msg::ModeRequest>::SharedPtr 
@@ -104,6 +109,14 @@ private:
 
   void handle_destination_request(
       rmf_fleet_msgs::msg::DestinationRequest::UniquePtr msg);
+
+  // --------------------------------------------------------------------------
+
+  rclcpp::Subscription<rmf_fleet_msgs::msg::MapRequest>::SharedPtr
+      map_request_sub;
+
+  void handle_map_request(
+      rmf_fleet_msgs::msg::MapRequest::UniquePtr msg);
 
   // --------------------------------------------------------------------------
 

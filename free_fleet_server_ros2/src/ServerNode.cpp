@@ -25,6 +25,7 @@
 #include <free_fleet/messages/ModeRequest.hpp>
 #include <free_fleet/messages/PathRequest.hpp>
 #include <free_fleet/messages/DestinationRequest.hpp>
+#include <free_fleet/messages/MapRequest.hpp>
 
 #include "utilities.hpp"
 #include "ServerNode.hpp"
@@ -215,8 +216,24 @@ void ServerNode::start(Fields _fields)
             handle_destination_request(std::move(msg));
           },
           destination_request_sub_opt);
+ // --------------------------------------------------------------------------
+ // Map reqeust handling
+
+  auto map_request_sub_opt = rclcpp::SubscriptionOptions();
+
+  map_request_sub_opt.callback_group = fleet_state_pub_callback_group;
+
+  map_request_sub = 
+      create_subscription<rmf_fleet_msgs::msg::MapRequest>(
+          server_node_config.map_request_topic, rclcpp::QoS(10),
+          [&](rmf_fleet_msgs::msg::MapRequest::UniquePtr msg)
+          {
+            handle_map_request(std::move(msg));
+          },
+          map_request_sub_opt);
 }
 
+ 
 bool ServerNode::is_request_valid(
     const std::string& _fleet_name, const std::string& _robot_name)
 {
@@ -306,6 +323,15 @@ void ServerNode::transform_rmf_to_fleet(
   _fleet_frame_location.level_name = _rmf_frame_location.level_name;
 }
 
+void ServerNode::transform_rmf_to_fleet(
+  const rmf_fleet_msgs::msg::MapRequest& _rmf_map_request,
+  rmf_fleet_msgs::msg::MapRequest& _fleet_map_request) const
+{
+  _fleet_map_request.fleet_name = _rmf_map_request.fleet_name;
+  _fleet_map_request.robot_name = _rmf_map_request.robot_name;
+  _fleet_map_request.map_number = _rmf_map_request.map_number;
+}
+
 void ServerNode::handle_mode_request(
     rmf_fleet_msgs::msg::ModeRequest::UniquePtr _msg)
 {
@@ -339,6 +365,17 @@ void ServerNode::handle_destination_request(
   messages::DestinationRequest ff_msg;
   to_ff_message(*(_msg.get()), ff_msg);
   fields.server->send_destination_request(ff_msg);
+}
+
+void ServerNode::handle_map_request(
+  rmf_fleet_msgs::msg::MapRequest::UniquePtr _msg)
+{
+  rmf_fleet_msgs::msg::MapRequest fleet_map_request;
+  // transform_rmf_to_fleet(_msg, fleet_map_request);
+  messages::MapRequest ff_msg;
+  to_ff_message(*(_msg.get()), ff_msg);
+  fields.server->send_map_request(ff_msg);
+   
 }
 
 void ServerNode::update_state_callback()
