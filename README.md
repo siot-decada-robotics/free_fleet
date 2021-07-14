@@ -101,7 +101,7 @@ Start a new ROS2 workspace, and pull in the necessary repositories,
 mkdir -p ~/server_ws/src
 cd ~/server_ws/src
 git clone -b noetic-devel-multi-fix https://github.com/siot-decada-robotics/free_fleet.git
-git clone https://github.com/open-rmf/rmf_internal_msgs
+git clone https://github.com/siot-decada-robotics/rmf_internal_msgs
 ```
 
 Install all the dependencies through `rosdep`,
