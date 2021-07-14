@@ -90,6 +90,7 @@ void ClientNodeConfig::print_config() const
   printf("    path request: %s\n", dds_path_request_topic.c_str());
   printf("    destination request: %s\n", 
       dds_destination_request_topic.c_str());
+    printf("    map request: %s\n", dds_map_request_topic.c_str());
 }
   
 ClientConfig ClientNodeConfig::get_client_config() const
@@ -100,6 +101,7 @@ ClientConfig ClientNodeConfig::get_client_config() const
   client_config.dds_mode_request_topic = dds_mode_request_topic;
   client_config.dds_path_request_topic = dds_path_request_topic;
   client_config.dds_destination_request_topic = dds_destination_request_topic;
+  client_config.dds_map_request_topic = dds_map_request_topic;
   return client_config;
 }
 
@@ -133,6 +135,9 @@ ClientNodeConfig ClientNodeConfig::make()
   config.get_param_if_available(
       node_private_ns, "dds_destination_request_topic", 
       config.dds_destination_request_topic);
+  config.get_param_if_available(
+      node_private_ns, "dds_map_request_topic", 
+      config.dds_map_request_topic);
   config.get_param_if_available(
       node_private_ns, "wait_timeout", config.wait_timeout);
   config.get_param_if_available(
