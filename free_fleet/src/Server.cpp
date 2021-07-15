@@ -107,4 +107,10 @@ bool Server::send_destination_request(
   return impl->send_destination_request(_destination_request);
 }
 
+bool Server::send_map_request(
+    const messages::MapRequest& _map_request)
+{
+  return impl->send_map_request(_map_request);
+}
+
 } // namespace free_fleet

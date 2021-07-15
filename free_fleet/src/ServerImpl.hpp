@@ -22,6 +22,7 @@
 #include <free_fleet/messages/ModeRequest.hpp>
 #include <free_fleet/messages/PathRequest.hpp>
 #include <free_fleet/messages/DestinationRequest.hpp>
+#include <free_fleet/messages/MapRequest.hpp>
 #include <free_fleet/Server.hpp>
 #include <free_fleet/ServerConfig.hpp>
 
@@ -58,6 +59,10 @@ public:
     /// DDS publisher for destination requests to be sent to clients
     dds::DDSPublishHandler<FreeFleetData_DestinationRequest>::SharedPtr
         destination_request_pub;
+
+    /// DDS publisher for destination requests to be sent to clients
+    dds::DDSPublishHandler<FreeFleetData_MapRequest>::SharedPtr
+        map_request_pub;
   };
 
   ServerImpl(const ServerConfig& config);
@@ -74,6 +79,8 @@ public:
 
   bool send_destination_request(
       const messages::DestinationRequest& destination_request);
+
+  bool send_map_request(const messages::MapRequest& map_request);
 
 private:
 
