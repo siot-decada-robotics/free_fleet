@@ -189,6 +189,23 @@ extern const dds_topic_descriptor_t FreeFleetData_DestinationRequest_desc;
 #define FreeFleetData_DestinationRequest_free(d,o) \
 dds_sample_free ((d), &FreeFleetData_DestinationRequest_desc, (o))
 
+
+typedef struct FreeFleetData_MapRequest
+{
+  char * fleet_name;
+  char * robot_name;
+  uint32_t map_number;
+} FreeFleetData_MapRequest;
+
+extern const dds_topic_descriptor_t FreeFleetData_MapRequest_desc;
+
+#define FreeFleetData_MapRequest__alloc() \
+((FreeFleetData_MapRequest*) dds_alloc (sizeof (FreeFleetData_MapRequest)));
+
+#define FreeFleetData_MapRequest_free(d,o) \
+dds_sample_free ((d), &FreeFleetData_MapRequest_desc, (o))
+
+
 #ifdef __cplusplus
 }
 #endif
