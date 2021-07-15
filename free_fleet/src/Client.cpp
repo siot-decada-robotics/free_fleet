@@ -106,4 +106,9 @@ bool Client::read_destination_request(
   return impl->read_destination_request(_destination_request);
 }
 
+bool Client::read_map_request(messages::MapRequest& _map_request)
+{
+  return impl->read_map_request(_map_request);
+}
+
 } // namespace free_fleet

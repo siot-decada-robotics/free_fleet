@@ -84,4 +84,18 @@ bool Client::ClientImpl::read_destination_request(
   return false;
 }
 
+bool Client::ClientImpl::read_map_request(
+    messages::MapRequest& _map_request)
+{
+  auto map_requests = fields.map_request_sub->read();
+  if (!map_requests.empty())
+  { 
+    convert(*(map_requests[0]), _map_request);
+    return true;
+  }
+  return false;
+}
+
+
+
 } // namespace free_fleet
