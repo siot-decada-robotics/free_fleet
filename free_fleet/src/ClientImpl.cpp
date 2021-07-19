@@ -17,6 +17,7 @@
 
 #include "ClientImpl.hpp"
 #include "messages/message_utils.hpp"
+#include <iostream>
 
 namespace free_fleet {
 
@@ -79,6 +80,18 @@ bool Client::ClientImpl::read_destination_request(
   if (!destination_requests.empty())
   {
     convert(*(destination_requests[0]), _destination_request);
+    return true;
+  }
+  return false;
+}
+
+bool Client::ClientImpl::read_map_request(
+    messages::MapRequest& _map_request)
+{
+  auto map_requests = fields.map_request_sub->read();
+  if (!map_requests.empty())
+  { 
+    convert(*(map_requests[0]), _map_request);
     return true;
   }
   return false;

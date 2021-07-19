@@ -87,4 +87,14 @@ bool Server::ServerImpl::send_destination_request(
   return sent;
 }
 
+bool Server::ServerImpl::send_map_request(
+    const messages::MapRequest& _map_request)
+{
+  FreeFleetData_MapRequest* new_mr = FreeFleetData_MapRequest__alloc();
+  convert(_map_request, *new_mr);
+  bool sent = fields.map_request_pub->write(new_mr);
+  FreeFleetData_MapRequest_free(new_mr, DDS_FREE_ALL);
+  return sent;
+}
+
 } // namespace free_fleet

@@ -26,6 +26,7 @@
 #include <free_fleet/messages/ModeRequest.hpp>
 #include <free_fleet/messages/PathRequest.hpp>
 #include <free_fleet/messages/DestinationRequest.hpp>
+#include <free_fleet/messages/MapRequest.hpp>
 
 namespace free_fleet {
 
@@ -83,6 +84,17 @@ public:
   ///   True if a new destination request was received, false otherwise.
   bool read_destination_request(
       messages::DestinationRequest& destination_request);
+  
+  /// Attempts to read and receive a new map request from the free fleet
+  /// server, for commanding the robot client to switch its map.
+  ///
+  /// \param[out] mode_request
+  ///   Newly received robot map request from the free fleet server, to be
+  ///   handled by the robot client.
+  /// \return
+  ///   True if a new mode request was received, false otherwise.
+  bool read_map_request(
+      messages::MapRequest& map_request);
 
   /// Destructor
   ~Client();

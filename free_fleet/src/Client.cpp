@@ -62,10 +62,18 @@ Client::SharedPtr Client::make(const ClientConfig& _config)
               participant, &FreeFleetData_DestinationRequest_desc,
               _config.dds_destination_request_topic));
 
+  dds::DDSSubscribeHandler<FreeFleetData_MapRequest>::SharedPtr 
+      map_request_sub(
+          new dds::DDSSubscribeHandler<FreeFleetData_MapRequest>(
+              participant, &FreeFleetData_MapRequest_desc,
+              _config.dds_map_request_topic));           
+  
+
   if (!state_pub->is_ready() ||
       !mode_request_sub->is_ready() ||
       !path_request_sub->is_ready() ||
-      !destination_request_sub->is_ready())
+      !destination_request_sub->is_ready() ||
+      !map_request_sub->is_ready())
     return nullptr;
 
   client->impl->start(ClientImpl::Fields{
@@ -73,7 +81,8 @@ Client::SharedPtr Client::make(const ClientConfig& _config)
       std::move(state_pub),
       std::move(mode_request_sub),
       std::move(path_request_sub),
-      std::move(destination_request_sub)});
+      std::move(destination_request_sub),
+      std::move(map_request_sub)});
   return client;
 }
 
@@ -104,6 +113,11 @@ bool Client::read_destination_request(
     messages::DestinationRequest& _destination_request)
 {
   return impl->read_destination_request(_destination_request);
+}
+
+bool Client::read_map_request(messages::MapRequest& _map_request)
+{
+  return impl->read_map_request(_map_request);
 }
 
 } // namespace free_fleet

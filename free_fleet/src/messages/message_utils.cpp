@@ -192,5 +192,23 @@ void convert(
   _output.task_id = std::string(_input.task_id);
 }
 
+void convert(
+    const FreeFleetData_MapRequest& _input,
+    MapRequest& _output)
+{
+  _output.fleet_name = std::string(_input.fleet_name);
+  _output.robot_name = std::string(_input.robot_name);
+  _output.map_number = _input.map_number;
+}
+
+void convert(
+    const MapRequest& _input,
+    FreeFleetData_MapRequest& _output)
+{
+  _output.fleet_name = common::dds_string_alloc_and_copy(_input.fleet_name);
+  _output.robot_name = common::dds_string_alloc_and_copy(_input.robot_name);
+  _output.map_number = _input.map_number;
+}
+
 } // namespace messages
 } // namespace free_fleet

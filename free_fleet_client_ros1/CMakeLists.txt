@@ -26,16 +26,33 @@ find_package(catkin QUIET COMPONENTS
   tf2_geometry_msgs
   actionlib
   move_base_msgs
+  message_generation
 )
 
 if (catkin_FOUND)
 
   find_package(free_fleet REQUIRED)
 
-  catkin_package()
+  #=============================================================================
+  add_message_files(
+    FILES
+    MapRequest.msg
+  )
+
+  generate_messages(
+    DEPENDENCIES
+    std_msgs
+  )
 
   #=============================================================================
 
+  catkin_package(
+    CATKIN_DEPENDS message_runtime
+  )
+
+  #=============================================================================
+  
+  
   add_executable(free_fleet_client_ros1
     src/main.cpp
     src/utilities.cpp
