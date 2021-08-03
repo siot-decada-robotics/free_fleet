@@ -63,6 +63,9 @@ if (catkin_FOUND)
     ${free_fleet_LIBRARIES}
     ${catkin_LIBRARIES}
   )
+  
+  add_dependencies(free_fleet_client_ros1 free_fleet_client_ros1_generate_messages_cpp)
+  
   target_include_directories(free_fleet_client_ros1
     PRIVATE
       ${free_fleet_INCLUDE_DIRS}
