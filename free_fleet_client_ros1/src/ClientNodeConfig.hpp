@@ -34,7 +34,7 @@ struct ClientNodeConfig
 
   std::string fleet_name = "fleet_name";
   std::string robot_name = "robot_name";
-  std::string robot_model = "robot_model";
+  std::string robot_model = "";
   std::string level_name = "level_name";
 
   std::string battery_state_topic = "/battery_state";
@@ -51,6 +51,7 @@ struct ClientNodeConfig
   std::string dds_mode_request_topic = "mode_request";
   std::string dds_path_request_topic = "path_request";
   std::string dds_destination_request_topic = "destination_request";
+  std::string dds_map_request_topic = "map_request";
 
   double wait_timeout = 10.0;
   double update_frequency = 10.0;
@@ -69,8 +70,6 @@ struct ClientNodeConfig
   void get_param_if_available(
       const ros::NodeHandle& node, const std::string& key,
       double& param_out);
-
-  void change_level();
 
   void print_config() const;
 
