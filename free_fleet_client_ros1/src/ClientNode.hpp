@@ -38,9 +38,6 @@
 
 #include <free_fleet/Client.hpp>
 #include <free_fleet/messages/Location.hpp>
-#include<free_fleet/messages/MapRequest.hpp>
-
-#include"free_fleet_client_ros1/MapRequest.h"
 
 #include "ClientNodeConfig.hpp"
 
@@ -95,8 +92,6 @@ private:
   // Battery handling
 
   ros::Subscriber battery_percent_sub;
-  
-  ros::Publisher map_request_pub;
 
   std::mutex battery_state_mutex;
 
@@ -144,18 +139,12 @@ private:
   bool read_destination_request();
 
   // --------------------------------------------------------------------------
-  // Map request handling
-
-  bool read_map_request();
+  // Task handling
 
   bool is_valid_request(
       const std::string& request_fleet_name,
       const std::string& request_robot_name,
       const std::string& request_task_id);
-  
-  bool is_valid_map_request(
-    const std::string& _request_fleet_name,
-    const std::string& _request_robot_name);
 
   move_base_msgs::MoveBaseGoal location_to_move_base_goal(
       const messages::Location& location) const;
@@ -202,6 +191,8 @@ private:
   ClientNode(const ClientNodeConfig& config);
 
   void start(Fields fields);
+
+  void update_level();
 
 };
 

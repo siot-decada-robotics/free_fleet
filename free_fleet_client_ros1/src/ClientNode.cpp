@@ -105,8 +105,6 @@ void ClientNode::start(Fields _fields)
   battery_percent_sub = node->subscribe(
       client_node_config.battery_state_topic, 1,
       &ClientNode::battery_state_callback_fn, this);
-  
-  map_request_pub = node->advertise<free_fleet_client_ros1::MapRequest>("map_request",100);
 
   request_error = false;
   emergency = false;
@@ -257,16 +255,6 @@ bool ClientNode::is_valid_request(
       client_node_config.robot_name != _request_robot_name ||
       client_node_config.fleet_name != _request_fleet_name)
     return false;
-  return true;
-}
-
-bool ClientNode::is_valid_map_request(
-    const std::string& _request_fleet_name,
-    const std::string& _request_robot_name)
-{ 
-  if (client_node_config.robot_name != _request_robot_name ||
-      client_node_config.fleet_name != _request_fleet_name )
-      return false;
   return true;
 }
 
@@ -448,32 +436,11 @@ bool ClientNode::read_destination_request()
   return false;
 }
 
-bool ClientNode::read_map_request()
-{  
-  //TODO: check if map request lift_number is valid as well
-  messages::MapRequest map_request;
-  free_fleet_client_ros1::MapRequest ros1_map_request;
-  if (fields.client->read_map_request(map_request) &&
-      is_valid_map_request(
-        map_request.fleet_name, map_request.robot_name))
-  {  
-    //publish map request
-    ros1_map_request.fleet_name = map_request.fleet_name;
-    ros1_map_request.robot_name = map_request.robot_name;
-    ros1_map_request.map_number = map_request.map_number;
-
-    map_request_pub.publish(ros1_map_request);
-
-  }
-  return false;
-}
-
 void ClientNode::read_requests()
 {
   if (read_mode_request() || 
       read_path_request() || 
-      read_destination_request() ||
-      read_map_request())
+      read_destination_request())
     return;
 }
 
@@ -534,6 +501,11 @@ void ClientNode::handle_requests()
   // otherwise, mode is correct, nothing in queue, nothing else to do then
 }
 
+void ClientNode::update_level()
+{
+  client_node_config.change_level();
+}
+
 void ClientNode::update_thread_fn()
 {
   while (node->ok())
@@ -546,6 +518,8 @@ void ClientNode::update_thread_fn()
     read_requests();
 
     handle_requests();
+
+    update_level();
   }
 }
 
