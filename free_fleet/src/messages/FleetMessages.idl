@@ -62,4 +62,12 @@ module FreeFleetData
     Location destination;
     string task_id;
   };
+  struct MapRequest
+  {
+    string fleet_name;
+    string robot_name;
+    string level_name;
+    long map_number;
+  };
+
 };

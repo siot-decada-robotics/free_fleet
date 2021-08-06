@@ -49,6 +49,7 @@ def main(argv = sys.argv):
 
     print('fleet_name: {}'.format(args.fleet_name))
     print('robot_name: {}'.format(args.robot_name))
+    print('robot_name: {}'.format(args.level_name))
     print('map_number: {}'.format(args.map_number))
     print('topic_name: {}'.format(args.topic_name))
 
@@ -60,7 +61,7 @@ def main(argv = sys.argv):
     msg.fleet_name = args.fleet_name
     msg.robot_name = args.robot_name
     msg.level_name = args.level_name
-    msg.map_number = args.map_number
+    msg.map_number = int(args.map_number)
 
     rclpy.spin_once(node, timeout_sec=2.0)
     pub.publish(msg)
