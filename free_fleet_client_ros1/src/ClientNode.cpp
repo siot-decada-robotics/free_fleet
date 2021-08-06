@@ -106,7 +106,7 @@ void ClientNode::start(Fields _fields)
       client_node_config.battery_state_topic, 1,
       &ClientNode::battery_state_callback_fn, this);
   
-  map_request_pub = node->advertise<free_fleet_client_ros1::MapRequest>("map_request",100);
+  map_request_pub = node->advertise<free_fleet_client_ros1::MapRequest>("/map_request",100);
 
   request_error = false;
   emergency = false;

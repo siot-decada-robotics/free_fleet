@@ -49,7 +49,7 @@ def main(argv = sys.argv):
 
     print('fleet_name: {}'.format(args.fleet_name))
     print('robot_name: {}'.format(args.robot_name))
-    print('robot_name: {}'.format(args.level_name))
+    print('level_name: {}'.format(args.level_name))
     print('map_number: {}'.format(args.map_number))
     print('topic_name: {}'.format(args.topic_name))
 
