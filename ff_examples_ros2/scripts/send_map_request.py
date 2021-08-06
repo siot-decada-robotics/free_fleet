@@ -37,10 +37,12 @@ def main(argv = sys.argv):
     default_robot_name = 'robot_name'
     default_map_number = 1
     default_topic_name = 'map_request'
+    default_level_name = 'level1'
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--fleet-name', default=default_fleet_name)
     parser.add_argument('-r', '--robot-name', default=default_robot_name)
+    parser.add_argument('-l', '--level-name', default=default_level_name)
     parser.add_argument('-i', '--map-number', default=default_map_number)
     parser.add_argument('-t', '--topic-name', default=default_topic_name)
     args = parser.parse_args(argv[1:])
@@ -57,6 +59,7 @@ def main(argv = sys.argv):
     msg = MapRequest()
     msg.fleet_name = args.fleet_name
     msg.robot_name = args.robot_name
+    msg.level_name = args.level_name
     msg.map_number = args.map_number
 
     rclpy.spin_once(node, timeout_sec=2.0)
