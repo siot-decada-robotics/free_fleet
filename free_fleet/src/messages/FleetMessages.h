@@ -194,6 +194,7 @@ typedef struct FreeFleetData_MapRequest
 {
   char * fleet_name;
   char * robot_name;
+  char * level_name;
   uint32_t map_number;
 } FreeFleetData_MapRequest;
 
