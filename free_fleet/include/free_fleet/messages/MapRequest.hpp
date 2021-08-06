@@ -26,6 +26,7 @@ struct MapRequest
 {
   std::string fleet_name;
   std::string robot_name;
+  std::string level_name;
   uint32_t map_number;
 };
 

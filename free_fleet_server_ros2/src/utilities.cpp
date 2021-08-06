@@ -77,6 +77,7 @@ void to_ff_message(
 {
   _out_msg.fleet_name = _in_msg.fleet_name;
   _out_msg.robot_name = _in_msg.robot_name;
+  _out_msg.level_name = _in_msg.level_name;
   _out_msg.map_number = _in_msg.map_number;
 }
 

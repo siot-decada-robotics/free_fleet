@@ -204,6 +204,7 @@ static const uint32_t FreeFleetData_MapRequest_ops [] =
 {
   DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (FreeFleetData_MapRequest, fleet_name),
   DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (FreeFleetData_MapRequest, robot_name),
+  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (FreeFleetData_MapRequest, level_name),
   DDS_OP_ADR | DDS_OP_TYPE_4BY, offsetof (FreeFleetData_MapRequest, map_number),
   DDS_OP_RTS
 };
@@ -218,6 +219,6 @@ const dds_topic_descriptor_t FreeFleetData_MapRequest_desc =
   NULL,
   10,
   FreeFleetData_MapRequest_ops,
-  "<MetaData version=\"1.0.0\"><Module name=\"FreeFleetData\"><Struct name=\"MapRequest\"><Member name=\"fleet_name\"><String/></Member><Member name=\"robot_name\"><String/><Member name =\"map_number\"><ULong></Member></Struct></Module></MetaData>"
+  "<MetaData version=\"1.0.0\"><Module name=\"FreeFleetData\"><Struct name=\"MapRequest\"><Member name=\"fleet_name\"><String/></Member><Member name=\"robot_name\"><String/><Member name=\"level_name\"><String/><Member name =\"map_number\"><ULong></Member></Struct></Module></MetaData>"
 };
 

@@ -329,6 +329,7 @@ void ServerNode::transform_rmf_to_fleet(
 {
   _fleet_map_request.fleet_name = _rmf_map_request.fleet_name;
   _fleet_map_request.robot_name = _rmf_map_request.robot_name;
+  _fleet_map_request.level_name = _rmf_map_request.level_name;
   _fleet_map_request.map_number = _rmf_map_request.map_number;
 }
 

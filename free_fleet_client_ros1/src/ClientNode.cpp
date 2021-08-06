@@ -460,6 +460,7 @@ bool ClientNode::read_map_request()
     //publish map request
     ros1_map_request.fleet_name = map_request.fleet_name;
     ros1_map_request.robot_name = map_request.robot_name;
+    ros1_map_request.level_name = map_request.level_name;
     ros1_map_request.map_number = map_request.map_number;
 
     map_request_pub.publish(ros1_map_request);
