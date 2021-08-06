@@ -208,6 +208,7 @@ void convert(
 {
   _output.fleet_name = common::dds_string_alloc_and_copy(_input.fleet_name);
   _output.robot_name = common::dds_string_alloc_and_copy(_input.robot_name);
+  _output.level_name = common::dds_string_alloc_and_copy(_input.level_name);
   _output.map_number = _input.map_number;
 }
 
