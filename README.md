@@ -88,7 +88,11 @@ Source ROS1 and build,
 ```bash
 cd ~/client_ws
 source /opt/ros/noetic/setup.bash
-colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE
+colcon build --symlink-install --packages-skip map_change --cmake-args -DCMAKE_BUILD_TYPE=RELEASE
+
+# Optionally use the command below to only build the relevant packages,
+# colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
+#   --packages-skip map_change ff_examples_ros2 free_fleet_server_ros2
 ```
 
 </br>
@@ -121,6 +125,10 @@ colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE
 # Optionally use the command below to only build the relevant packages,
 # colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
 #   --packages-up-to free_fleet ff_examples_ros2 free_fleet_server_ros2
+
+# Optionally 2, this also works
+# colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
+#   --packages-skip ff_examples_ros1
 ```
 
 </br>
