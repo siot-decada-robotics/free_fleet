@@ -2,6 +2,12 @@
 
 <launch>
 
+  <node pkg="map_change"
+        exec="map_changer"
+        name="map_changer" >
+        
+  </node>
+  
   <node pkg="free_fleet_server_ros2"
       exec="free_fleet_server_ros2"
       name="turtlebot3_fleet_server_node"
@@ -29,7 +35,7 @@
     <param name="scale" value="1.0"/>
 
   </node>
-
-
+  
+  
 </launch>
 

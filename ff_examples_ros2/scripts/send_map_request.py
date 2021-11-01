@@ -33,11 +33,11 @@ def main(argv = sys.argv):
     - map_number: 2
     '''
 
-    default_fleet_name = 'fleet_name'
-    default_robot_name = 'robot_name'
+    default_fleet_name = 'turtlebot3'
+    default_robot_name = 'tb3_0'
     default_map_number = 1
     default_topic_name = 'map_request'
-    default_level_name = 'level1'
+    default_level_name = 'MBC_L9'
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--fleet-name', default=default_fleet_name)

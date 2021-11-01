@@ -204,6 +204,8 @@ private:
 
   void start(Fields fields);
 
+  void update_level();
+
 };
 
 } // namespace ros1

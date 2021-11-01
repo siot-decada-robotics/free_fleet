@@ -567,6 +567,11 @@ void ClientNode::handle_requests()
   // otherwise, mode is correct, nothing in queue, nothing else to do then
 }
 
+void ClientNode::update_level()
+{
+  client_node_config.change_level();
+}
+
 void ClientNode::update_thread_fn()
 {
   while (node->ok())
@@ -579,6 +584,8 @@ void ClientNode::update_thread_fn()
     read_requests();
 
     handle_requests();
+
+    update_level();
   }
 }
 

@@ -957,7 +957,7 @@ Visualization Manager:
               Show Trail: false
               Value: true
           Name: RobotModel
-          Robot Description: tb3_2/robot_description
+          Robot Description: caato_0/robot_description
           TF Prefix: tb3_2
           Update Interval: 0
           Value: true
