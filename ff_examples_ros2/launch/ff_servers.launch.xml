@@ -1,0 +1,13 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <include file="$(find-pkg-share ff_examples_ros2)/launch/caato_fleet_server.launch.xml">
+    <arg name="translation_x" value="30.23"/>
+    <arg name="translation_y" value="-19.34"/>
+    <arg name="rotation" value="3.11"/>
+    <arg name="scale" value="1.022"/>
+  </include>
+
+</launch>
+

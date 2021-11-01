@@ -1,6 +1,10 @@
 <?xml version='1.0' ?>
-
 <launch>
+
+  <arg name="translation_x" value="0.0"/>
+  <arg name="translation_y" value="0.0"/>
+  <arg name="rotation" value="0.0"/>
+  <arg name="scale" value="1.0"/>
 
   <node pkg="free_fleet_server_ros2"
       exec="free_fleet_server_ros2"
@@ -23,13 +27,16 @@
     <param name="update_state_frequency" value="20.0"/>
     <param name="publish_state_frequency" value="2.0"/>
 
-    <param name="translation_x" value="0.0"/>
-    <param name="translation_y" value="0.0"/>
-    <param name="rotation" value="0.0"/>
-    <param name="scale" value="1.0"/>
+    <!-- These transformations are required when the frame of the robot fleet is
+      different from that of RMF globally. In order to transform a pose from the RMF
+      frame to the free fleet robot frame, it is first scaled, rotated, then
+    translated using these parameters -->
+    <param name="scale" value="$(var scale)"/>
+    <param name="rotation" value="$(var rotation)"/>
+    <param name="translation_x" value="$(var translation_x)"/>
+    <param name="translation_y" value="$(var translation_y)"/>
 
   </node>
-
 
 </launch>
 
