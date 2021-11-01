@@ -92,6 +92,18 @@ void ClientNodeConfig::print_config() const
       dds_destination_request_topic.c_str());
     printf("    map request: %s\n", dds_map_request_topic.c_str());
 }
+
+void ClientNodeConfig::change_level()
+{
+  ros::NodeHandle node_private_ns("~");
+  std::string tmp_param;
+  node_private_ns.getParam("level_name", tmp_param);
+  if (tmp_param != this->level_name)
+  {
+    this->get_param_if_available(node_private_ns, "level_name", this->level_name);
+  }
+
+}
   
 ClientConfig ClientNodeConfig::get_client_config() const
 {

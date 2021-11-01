@@ -71,6 +71,8 @@ struct ClientNodeConfig
       const ros::NodeHandle& node, const std::string& key,
       double& param_out);
 
+  void change_level();
+  
   void print_config() const;
 
   ClientConfig get_client_config() const;
